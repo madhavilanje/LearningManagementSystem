@@ -397,6 +397,16 @@ namespace LMS.Application.Implementations
                 }
             }
 
+            // Firstly remove the discussion made by user
+            var discussions = await discussionRepository.FindAllAsync(u => u.UserId == userEntity.Id);
+            if (!enrollments.IsNullOrEmpty())
+            {
+                foreach (var discusion in discussions)
+                {
+                    await discussionRepository.DeleteAsync(discusion);
+                }
+            }
+
             // Now remove the member from the team
             int deletedTeamMember = await userRepository.DeleteAsync(userEntity);
             if (deletedTeamMember <= 0)

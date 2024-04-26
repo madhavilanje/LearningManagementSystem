@@ -36,7 +36,6 @@ namespace LMS.UserManagement.Api.Controllers
 
         }
 
-
         #region HttpGet
 
         /// <summary>

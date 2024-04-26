@@ -36,6 +36,7 @@ namespace LMS.Test.Implementations
         private Mock<IGenericRepository<Course>> mockCourseRepository;
         private Mock<IGenericRepository<LearningPath>> mockLearningPathRepository;
         private Mock<IGenericRepository<Enrollment>> mockEnrollmentRepository;
+        private Mock<IGenericRepository<Discussion>> mockDiscussionRepository;
         private Mock<IMapper> mockMapper;
         private Mock<IConfiguration> mockConfiguration;
         private Mock<ILogger<IUsersManager>> mockLogger;
@@ -49,6 +50,7 @@ namespace LMS.Test.Implementations
             var mockServiceProvider = new Mock<IServiceProvider>();
             mockUserRepository = new Mock<IGenericRepository<User>>();
             mockCourseRepository = new Mock<IGenericRepository<Course>>();
+            mockDiscussionRepository = new Mock<IGenericRepository<Discussion>>();
             mockLearningPathRepository = new Mock<IGenericRepository<LearningPath>>();
             mockEnrollmentRepository = new Mock<IGenericRepository<Enrollment>>();
             mockMapper = new Mock<IMapper>();
@@ -60,6 +62,7 @@ namespace LMS.Test.Implementations
             mockLogger = new Mock<ILogger<IUsersManager>>();
             mockServiceProvider.Setup(x => x.GetService(typeof(IGenericRepository<User>))).Returns(mockUserRepository.Object);
             mockServiceProvider.Setup(x => x.GetService(typeof(IGenericRepository<Course>))).Returns(mockCourseRepository.Object);
+            mockServiceProvider.Setup(x => x.GetService(typeof(IGenericRepository<Discussion>))).Returns(mockDiscussionRepository.Object);
             mockServiceProvider.Setup(x => x.GetService(typeof(IGenericRepository<LearningPath>))).Returns(mockLearningPathRepository.Object);
             mockServiceProvider.Setup(x => x.GetService(typeof(IGenericRepository<Enrollment>))).Returns(mockEnrollmentRepository.Object);
             mockServiceProvider.Setup(x => x.GetService(typeof(IMapper))).Returns(mockMapper.Object);

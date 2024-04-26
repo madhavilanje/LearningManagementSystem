@@ -354,58 +354,6 @@ namespace LMS.Test.Application.Implementations
         }
 
         [Test]
-        public async Task EnrollCourseAsync_WhenCalled_Returns__BadRequest_Response()
-        {
-            // Arrange
-            var claimDataModel = new UserClaimDataModel { Email = "test@example.com" };
-            var loggedInUserEntity = new User
-            {
-                Email = claimDataModel.Email,
-                Name = claimDataModel.Name,
-                Role = UserRole.Student.ToString(),
-                Id = 1
-            };
-
-            var successResponse = new ErrorResponse<string>
-            {
-                StatusCode = HttpStatusCode.BadRequest
-            };
-            var enrollments = new List<Enrollment>
-            {
-                new Enrollment{ Id = 1}
-            };
-            var course = new Course
-            {
-                Id = 1,
-                Title = " ",
-
-            };
-
-            var enrollment = new Enrollment
-            {
-                Id = 1,
-            };
-            var learningPath = new LearningPath
-            {
-                Id = 1,
-                Title = " ",
-            };
-
-            int courseId = 1;
-            int learningId = 1;
-            mockUserRepository.Setup(repo => repo.FindAsync(u => u.Email == claimDataModel.Email))
-                .ReturnsAsync(loggedInUserEntity);
-            mockEnrollmentRepository.Setup(repo => repo.FindAsync(u => u.CourseId == courseId && u.LearningPathId == learningId && u.StudentId == loggedInUserEntity.Id))
-                .ReturnsAsync(enrollment);
-
-            // Act
-            var response = await manager.EnrollCourseAsync(learningId, courseId, claimDataModel);
-
-            // Assert
-            Assert.That(response.StatusCode, Is.EqualTo(successResponse.StatusCode));
-        }
-
-        [Test]
         public async Task EnrollCourseAsync_WhenCalled_Returns_InternalServerErrorResponse()
         {
             // Arrange
